@@ -1,0 +1,12 @@
+# Dockerfile.node
+FROM node:22.6.0
+
+# Установка ESLint, HTMLHint и Stylelint
+RUN npm install -g eslint@8.57.0 htmlhint@1.1.4 stylelint@15.2.0
+
+WORKDIR /app
+
+# Копирование конфигурационных файлов линтеров в директорию /app
+COPY eslint.config.mjs ./
+COPY .htmlhintrc ./
+COPY .stylelintrc ./
