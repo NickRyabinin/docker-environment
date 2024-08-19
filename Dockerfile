@@ -1,5 +1,5 @@
-# Используем базовый образ PHP
-FROM php:8.3.10
+# Используем базовый образ PHP-FPM
+FROM php:8.3.10-fpm
 
 # Установка необходимых расширений и инструментов для PHP
 RUN apt-get update && apt-get install -y \
