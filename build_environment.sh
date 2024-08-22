@@ -1,6 +1,6 @@
 #!/bin/bash
 
 mkdir -p ./app/src/
-mkdir -p ./db/postgresql/
+mkdir ./db/
 
 docker-compose up --build

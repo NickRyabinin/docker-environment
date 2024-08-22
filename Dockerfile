@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && chmod +x /usr/local/bin/phpcs \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-	&& apt-get clean \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Настройка Xdebug
