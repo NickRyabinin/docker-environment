@@ -22,8 +22,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/app # Монтируем в общий путь
-    depends_on:
-      - postgresql
+    extra_hosts:
+      - 'host.docker.internal:host-gateway' # for step debugging with Xdebug
     networks:
       - mynetwork
 
@@ -43,6 +43,3 @@ services:
 networks:
   mynetwork:
     driver: bridge
-
-volumes:
-  ./db:
