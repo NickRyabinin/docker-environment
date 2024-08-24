@@ -1,13 +1,12 @@
 version: '3'
 services:
   postgresql:
-    container_name: 'pgsql'
+    container_name: 'postgres'
     image: postgres:16.4
     networks:
       - mynetwork
     ports:
       - '5432:5432'
-    restart: always
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
@@ -16,14 +15,15 @@ services:
       - ./db:/var/lib/postgresql/data
 
   php:
-    container_name: 'php-fpm-node'
+    container_name: 'php'
     build:
       context: .
       dockerfile: Dockerfile
+    image: php:0.9
     volumes:
       - ./app:/app # Монтируем в общий путь
     extra_hosts:
-      - 'host.docker.internal:host-gateway' # for step debugging with Xdebug
+      - 'host.docker.internal:host-gateway' # Для взаимодействия Xdebug с хостом
     networks:
       - mynetwork
 
