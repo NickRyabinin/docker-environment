@@ -42,6 +42,3 @@ RUN npm install
 COPY eslint.config.mjs ./
 COPY .htmlhintrc ./
 COPY .stylelintrc ./
-
-# Копирование остальных файлов приложения
-COPY . .
