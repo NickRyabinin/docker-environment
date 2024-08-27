@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Настройка Xdebug
-COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY ./configs/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Установка Node.js
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
@@ -32,13 +32,13 @@ RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
 WORKDIR /app
 
 # Копирование package.json и package-lock.json
-COPY package.json ./
-COPY package-lock.json ./
+COPY ./configs/package.json ./
+COPY ./configs/package-lock.json ./
 
 # Установка зависимостей из package.json
 RUN npm install
 
 # Копирование конфигурационных файлов линтеров в директорию /app
-COPY eslint.config.mjs ./
-COPY .htmlhintrc ./
-COPY .stylelintrc ./
+COPY ./configs/eslint.config.mjs ./
+COPY ./configs/.htmlhintrc ./
+COPY ./configs/.stylelintrc ./
