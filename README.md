@@ -27,3 +27,12 @@ make run
 ```bash
 make stop
 ```
+
+### Линтинг написанного кода
+
+```bash
+make lint-php
+make lint-js
+make lint-html
+make lint-css
+```
