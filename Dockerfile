@@ -34,7 +34,7 @@ RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
     && rm -rf /var/lib/apt/lists/*
 
 # Установка рабочей директории
-WORKDIR /app
+WORKDIR /project
 
 # Копирование package.json и package-lock.json
 COPY ./configs/package.json ./
