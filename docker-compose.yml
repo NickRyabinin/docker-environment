@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydatabase
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - ./project/db:/var/lib/postgresql/data
 
   php:
     container_name: 'php'
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     image: php:0.9
     volumes:
-      - ./app/src:/app/src # Монтируем в общий путь
+      - ./project/app:/project/app # Монтируем в общий путь
     extra_hosts:
       - 'host.docker.internal:host-gateway' # Для взаимодействия Xdebug с хостом
     networks:
@@ -33,7 +33,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./app/src:/app/src # Nginx будет обслуживать файлы из этой директории
+      - ./project/app:/project/app # Nginx будет обслуживать файлы из этой директории
       - ./configs/nginx.conf:/etc/nginx/conf.d/default.conf # Подключаем конфигурацию Nginx
     depends_on:
       - php
