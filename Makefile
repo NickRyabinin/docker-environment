@@ -1,16 +1,16 @@
-build:
-	mkdir -p ./app/src/
-	mkdir -p ./db/
+build-dev:
+	mkdir -p ./project/app/src/
+	mkdir -p ./project/db/
 	docker-compose up --build
 run:
 	docker-compose up -d
 stop:
 	docker-compose stop
 lint-php:
-	docker-compose exec php phpcs --standard=PSR12 --extensions=php ./src/
+	docker-compose exec php phpcs --standard=PSR12 --extensions=php ./app/
 lint-js:
-	docker-compose exec php npx eslint ./src/
+	docker-compose exec php npx eslint ./app/
 lint-html:
-	docker-compose exec php npx htmlhint ./src/
+	docker-compose exec php npx htmlhint ./app/
 lint-css:
-	docker-compose exec php npx stylelint ./src/styles/*.css
+	docker-compose exec php npx stylelint ./app/src/styles/*.css
