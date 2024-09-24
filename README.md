@@ -4,7 +4,11 @@
 
 Планируется подготовить набор Dockerfile и docker-compose.yml для развёртывания рабочего окружения php-разработчика в изолированных контейнерах через Docker / Docker Compose.
 
-В идеале хотелось бы иметь PHP (с xdebug, phpcs, phpunit и, возможно, phpstan), Node (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером типа http-server), Nginx и PostgreSQL.
+Состав контейнеров:
+
+1. PHP (с xdebug, phpcs, phpunit и, возможно, phpstan), Node (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером типа http-server)
+2. Nginx
+3. PostgreSQL
 
 ### Клонирование репозитория и сборка контейнеров
 
@@ -13,7 +17,7 @@ git clone git@github.com:NickRyabinin/docker-environment.git
 
 cd docker-environment/
 
-make build
+make build-dev
 ```
 
 ### Запуск контейнеров
@@ -26,6 +30,12 @@ make run
 
 ```bash
 make stop
+```
+
+### Запуск терминала в контейнере
+
+```bash
+make bash
 ```
 
 ### Линтинг написанного кода
