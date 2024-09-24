@@ -6,6 +6,8 @@ run:
 	docker-compose up -d
 stop:
 	docker-compose stop
+bash:
+	docker-compose exec php bash
 lint-php:
 	docker-compose exec php phpcs --standard=PSR12 --extensions=php ./app/
 lint-js:
