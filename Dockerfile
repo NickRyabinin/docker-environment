@@ -14,8 +14,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_pgsql mbstring \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && curl -sS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit \
-    && chmod +x /usr/local/bin/phpunit \
     && curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
     && mv phpcs.phar /usr/local/bin/phpcs \
     && chmod +x /usr/local/bin/phpcs \
@@ -43,7 +41,11 @@ COPY ./configs/package-lock.json ./
 # Установка зависимостей из package.json
 RUN npm install
 
-# Копирование конфигурационных файлов линтеров в директорию /app
+# Установка PHPUnit через Composer
+RUN composer require --dev phpunit/phpunit ^11.0
+
+# Копирование конфигурационных файлов линтеров в директорию /project
 COPY ./configs/eslint.config.mjs ./
 COPY ./configs/.htmlhintrc ./
 COPY ./configs/.stylelintrc ./
+COPY ./configs/phpunit.xml ./
