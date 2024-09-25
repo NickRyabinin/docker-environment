@@ -1,6 +1,7 @@
 build-dev:
 	mkdir -p ./project/app/src/
 	mkdir -p ./project/db/
+	mkdir -p ./project/tests/
 	docker-compose up --build
 run:
 	docker-compose up -d
@@ -16,3 +17,5 @@ lint-html:
 	docker-compose exec php npx htmlhint ./app/
 lint-css:
 	docker-compose exec php npx stylelint ./app/src/styles/*.css
+test:
+	docker-compose exec php ./vendor/bin/phpunit --configuration /project/phpunit.xml tests/
