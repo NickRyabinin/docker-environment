@@ -6,7 +6,8 @@
 
 Состав контейнеров:
 
-1. PHP (с xdebug, phpcs, phpunit и, возможно, phpstan), Node (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером типа http-server)
+1. PHP (с xdebug *, phpcs, phpunit и, возможно, phpstan), Node (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером типа http-server).
+	* Конфиг Xdebug рассчитан на работу в VS Code.
 2. Nginx
 3. PostgreSQL
 
@@ -45,4 +46,9 @@ make lint-php
 make lint-js
 make lint-html
 make lint-css
+```
+### Запуск phpunit-тестов (из директории tests/)
+
+```bash
+make test
 ```
