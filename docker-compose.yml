@@ -21,7 +21,8 @@ services:
       dockerfile: Dockerfile
     image: php:0.9
     volumes:
-      - ./project/app:/project/app # Монтируем в общий путь
+      - ./project/app:/project/app # Монтируем код приложения
+      - ./project/tests:/project/tests # Монтируем директорию с тестами
     extra_hosts:
       - 'host.docker.internal:host-gateway' # Для взаимодействия Xdebug с хостом
     networks:
