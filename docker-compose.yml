@@ -23,6 +23,17 @@ services:
     volumes:
       - ./project/app:/project/app # Монтируем код приложения
       - ./project/tests:/project/tests # Монтируем директорию с тестами
+      # Монтируем файлы управления зависимостями
+      - ./project/package.json:/project/package.json
+      - ./project/package-lock.json:/project/package-lock.json
+      - ./project/composer.json:/project/composer.json
+      - ./project/composer.lock:/project/composer.lock
+      # Монтируем конфигурационные файлы
+      - ./project/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./project/eslint.config.mjs:/project/eslint.config.mjs
+      - ./project/.htmlhintrc:/project/.htmlhintrc
+      - ./project/.stylelintrc:/project/.stylelintrc
+      - ./project/phpunit.xml:/project/phpunit.xml
     extra_hosts:
       - 'host.docker.internal:host-gateway' # Для взаимодействия Xdebug с хостом
     networks:
@@ -35,7 +46,7 @@ services:
       - "80:80"
     volumes:
       - ./project/app:/project/app # Nginx будет обслуживать файлы из этой директории
-      - ./configs/nginx.conf:/etc/nginx/conf.d/default.conf # Подключаем конфигурацию Nginx
+      - ./project/nginx.conf:/etc/nginx/conf.d/default.conf # Подключаем конфигурацию Nginx
     depends_on:
       - php
     networks:
