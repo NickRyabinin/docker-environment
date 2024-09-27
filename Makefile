@@ -2,6 +2,8 @@ build-dev:
 	mkdir -p ./project/app/src/
 	mkdir -p ./project/db/
 	mkdir -p ./project/tests/
+	cp ./configs/* ./project/
+	cp ./configs/.htmlhintrc ./configs/.stylelintrc ./project/
 	docker-compose up --build
 run:
 	docker-compose up -d
