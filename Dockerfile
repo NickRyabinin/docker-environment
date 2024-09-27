@@ -22,9 +22,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Настройка Xdebug
-COPY ./configs/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
 # Установка Node.js
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
@@ -34,18 +31,12 @@ RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
 # Установка рабочей директории
 WORKDIR /project
 
-# Копирование package.json и package-lock.json
-COPY ./configs/package.json ./
-COPY ./configs/package-lock.json ./
+# Копирование package.json и package-lock.json в контейнер
+COPY ./project/package.json ./
+COPY ./project/package-lock.json ./
 
 # Установка зависимостей из package.json
 RUN npm install
 
 # Установка PHPUnit через Composer
 RUN composer require --dev phpunit/phpunit ^11.0
-
-# Копирование конфигурационных файлов линтеров в директорию /project
-COPY ./configs/eslint.config.mjs ./
-COPY ./configs/.htmlhintrc ./
-COPY ./configs/.stylelintrc ./
-COPY ./configs/phpunit.xml ./
