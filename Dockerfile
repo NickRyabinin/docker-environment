@@ -37,6 +37,3 @@ COPY ./project/package-lock.json ./
 
 # Установка зависимостей из package.json
 RUN npm install
-
-# Установка PHPUnit через Composer
-RUN composer require --dev phpunit/phpunit ^11.0
