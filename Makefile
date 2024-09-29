@@ -21,3 +21,5 @@ lint-css:
 	docker-compose exec php npx stylelint ./app/src/styles/*.css
 test:
 	docker-compose exec php ./vendor/bin/phpunit --configuration /project/phpunit.xml tests/
+scan:
+	docker-compose exec php ./vendor/bin/phpstan analyse --configuration /project/phpstan.neon app/ tests/
