@@ -47,6 +47,13 @@ make lint-js
 make lint-html
 make lint-css
 ```
+
+### Анализ кода с помощью PHPStan
+
+```bash
+make scan
+```
+
 ### Запуск phpunit-тестов (из директории tests/)
 
 ```bash
