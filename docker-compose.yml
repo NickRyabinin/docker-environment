@@ -37,8 +37,8 @@ services:
       - ./project/phpstan.neon:/project/phpstan.neon
     extra_hosts:
       - 'host.docker.internal:host-gateway' # Для взаимодействия Xdebug с хостом
-    command:
-      - bash -c "composer require --dev phpunit/phpunit ^11.0 && composer require --dev phpstan/phpstan && php-fpm"
+    depends_on:
+      - postgresql
     networks:
       - mynetwork
 
