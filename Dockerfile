@@ -3,7 +3,6 @@ FROM php:8.3.10-fpm
 
 # Установка необходимых расширений и инструментов для PHP
 RUN apt-get update && apt-get install -y \
-    git \
     unzip \
     libpq-dev \
     libonig-dev \
@@ -14,9 +13,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_pgsql mbstring \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
-    && mv phpcs.phar /usr/local/bin/phpcs \
-    && chmod +x /usr/local/bin/phpcs \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apt-get clean \
@@ -30,6 +26,13 @@ RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
 
 # Установка рабочей директории
 WORKDIR /project
+
+# Копирование composer.json и composer.lock в контейнер
+COPY ./project/composer.json ./
+COPY ./project/composer.lock ./
+
+# Установка зависимостей из composer.json
+RUN composer install
 
 # Копирование package.json и package-lock.json в контейнер
 COPY ./project/package.json ./
