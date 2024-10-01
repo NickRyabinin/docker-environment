@@ -12,7 +12,7 @@ stop:
 bash:
 	docker-compose exec php bash
 lint-php:
-	docker-compose exec php phpcs --standard=PSR12 --extensions=php ./app/
+	docker-compose exec php ./vendor/bin/phpcs --standard=PSR12 --extensions=php ./app/
 lint-js:
 	docker-compose exec php npx eslint ./app/
 lint-html:
