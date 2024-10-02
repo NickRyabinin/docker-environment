@@ -1,21 +1,26 @@
-# docker-environment
+# Docker-environment for PHP-developers
 
-### В процессе ...
-
-Планируется подготовить набор Dockerfile и docker-compose.yml для развёртывания рабочего окружения php-разработчика в изолированных контейнерах через Docker / Docker Compose.
+Набор Dockerfile и docker-compose.yml для развёртывания рабочего окружения php-разработчика в изолированных контейнерах через Docker / Docker Compose.
 
 Состав контейнеров:
 
-1. PHP (с xdebug *, phpcs, phpunit и, возможно, phpstan), Node (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером типа http-server).
+1. PHP 8.3.10-fpm (с composer, xdebug *, phpcs, phpunit, phpstan) и Node 22.x (с набором линтеров ESLint, HtmlHint, StyleLint и простым сервером http-server).
 	* Конфиг Xdebug рассчитан на работу в VS Code.
-2. Nginx
-3. PostgreSQL
+2. Nginx 1.27.0 (localhost:80 в директории /project/app).
+3. PostgreSQL 16.4 * (myuser/mypassword/mydatabase - изменить можно в docker-compose.yml).
+	* Данные дублируются в /project/db/ на хосте
 
-### Клонирование репозитория и сборка контейнеров
+Конфиги nginx, xdebug, линтеров, composer, npm будут доступны в корне директории project/
+
+### Клонирование репозитория
 
 ```bash
 git clone git@github.com:NickRyabinin/docker-environment.git
+```
 
+### Сборка контейнеров и создание базовых директорий проекта
+
+```bash
 cd docker-environment/
 
 make build-dev
@@ -33,7 +38,7 @@ make run
 make stop
 ```
 
-### Запуск терминала в контейнере
+### Запуск терминала в контейнере php
 
 ```bash
 make bash
